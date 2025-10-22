@@ -31,8 +31,8 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 30240
-          swap-size-mb: 20240
+          root-reserve-mb: 20480
+          swap-size-mb: 10240
           remove-dotnet: 'true'
       - name: Collect Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@94c3c3d9567a0205de6da68a76c428ce4e769af1 # v2.0.0
