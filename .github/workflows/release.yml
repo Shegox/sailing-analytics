@@ -28,28 +28,12 @@ jobs:
       actions: read
     runs-on: ${{ github.event.inputs.runner_cpus != '' && format('ubuntu-latest-{0}cpu', github.event.inputs.runner_cpus) || 'ubuntu-latest' }}
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
         with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: false
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: false
-          swap-storage: false
-      - name: Allocate swap space
-        shell: bash
-        run: |
-          sudo dd if=/dev/zero of=/large-swapfile bs=1G count=10
-          sudo chmod 600 /large-swapfile
-          sudo mkswap /large-swapfile
-          sudo chown root:root /large-swapfile
-          sudo swapon /large-swapfile
+          root-reserve-mb: 10240
+          swap-size-mb: 10240
+          remove-dotnet: 'true'
       - name: Collect Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@94c3c3d9567a0205de6da68a76c428ce4e769af1 # v2.0.0
         with:
