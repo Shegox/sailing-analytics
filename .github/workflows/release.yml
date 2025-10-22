@@ -38,6 +38,8 @@ jobs:
         uses: catchpoint/workflow-telemetry-action@94c3c3d9567a0205de6da68a76c428ce4e769af1 # v2.0.0
         with:
           comment_on_pr: false
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Setup firefox
         id: setup-firefox
         uses: browser-actions/setup-firefox@5914774dda97099441f02628f8d46411fcfbd208 # v1.7.0
